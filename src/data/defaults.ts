@@ -164,14 +164,16 @@ export const defaultContent: SiteContent = {
     workflowIntroPrefix: "Connects to the exact systems named in the brief — ",
     workflowIntroBold: "no additional equipment, no changes to KFC store workflow.",
     workflowChips: ["Messenger", "Zalo", "Mobile app", "OMS", "Loyalty"],
-    guardrails: {
-      label: "Guardrails.",
-      body: " Constrained to KFC’s live menu & voucher data — never invents items or prices. Confirms before committing an order; escalates on low confidence.",
-    },
-    dataNote: {
-      label: "Data.",
-      body: " Customer identity and history stay in KFC’s ownership.",
-    },
+    workflowNotes: [
+      {
+        label: "Guardrails.",
+        body: " Constrained to KFC’s live menu & voucher data — never invents items or prices. Confirms before committing an order; escalates on low confidence.",
+      },
+      {
+        label: "Data.",
+        body: " Customer identity and history stay in KFC’s ownership.",
+      },
+    ],
   },
 
   economics: {

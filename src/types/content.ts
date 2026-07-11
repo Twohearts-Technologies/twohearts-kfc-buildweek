@@ -114,8 +114,7 @@ export interface MetricsWorkflowContent {
   workflowIntroPrefix: string;
   workflowIntroBold: string;
   workflowChips: string[];
-  guardrails: LabeledNote;
-  dataNote: LabeledNote;
+  workflowNotes: LabeledNote[];
 }
 
 // ---------- Economics ----------

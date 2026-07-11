@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { defaultContent } from "../data/defaults";
 import { deepMerge } from "../lib/deepMerge";
+import { normalizeContent } from "../lib/normalizeContent";
 import type {
   DemoStep,
   FooterLink,
@@ -100,7 +101,7 @@ export default function EditPage() {
         ) {
           const merged = deepMerge(
             defaultContent as unknown as Record<string, unknown>,
-            data as Record<string, unknown>,
+            normalizeContent(data) as Record<string, unknown>,
           ) as unknown as SiteContent;
           setDraft(merged);
         }
@@ -615,25 +616,28 @@ export default function EditPage() {
                 items={draft.metrics.workflowChips}
                 onChange={(next) => update((d) => { d.metrics.workflowChips = next; })}
               />
-              <Field
-                label="Guardrails — label"
-                value={draft.metrics.guardrails.label}
-                onChange={(v) => update((d) => { d.metrics.guardrails.label = v; })}
-              />
-              <TextArea
-                label="Guardrails — body"
-                value={draft.metrics.guardrails.body}
-                onChange={(v) => update((d) => { d.metrics.guardrails.body = v; })}
-              />
-              <Field
-                label="Data note — label"
-                value={draft.metrics.dataNote.label}
-                onChange={(v) => update((d) => { d.metrics.dataNote.label = v; })}
-              />
-              <TextArea
-                label="Data note — body"
-                value={draft.metrics.dataNote.body}
-                onChange={(v) => update((d) => { d.metrics.dataNote.body = v; })}
+              <Repeater
+                label="Workflow notes"
+                count={draft.metrics.workflowNotes.length}
+                itemTitle={(i) => `Note ${i + 1}`}
+                addLabel="Add note"
+                onAdd={() => update((d) => { d.metrics.workflowNotes.push(newLabeledNote()); })}
+                onRemove={(i) => update((d) => { d.metrics.workflowNotes.splice(i, 1); })}
+                onMove={(i, dir) => update((d) => { moveItem(d.metrics.workflowNotes, i, dir); })}
+                renderItem={(i) => (
+                  <>
+                    <Field
+                      label="Label"
+                      value={draft.metrics.workflowNotes[i].label}
+                      onChange={(v) => update((d) => { d.metrics.workflowNotes[i].label = v; })}
+                    />
+                    <TextArea
+                      label="Body"
+                      value={draft.metrics.workflowNotes[i].body}
+                      onChange={(v) => update((d) => { d.metrics.workflowNotes[i].body = v; })}
+                    />
+                  </>
+                )}
               />
             </Section>
 
