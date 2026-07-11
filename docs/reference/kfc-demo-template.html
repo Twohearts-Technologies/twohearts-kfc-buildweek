@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="cf4bef91-b459-44cb-9af6-7a73993eb8c5"></script>
+
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Twohearts ✕ KFC Vietnam — Agentic Ordering Demo · AABW 2026 · P4</title>
+  <style>/* ============================================================
+   Twohearts — Fonts (self-hosted, uploaded by the brand team)
+
+   DISPLAY / HEADINGS → Helvetica Now Display (the brand typeface,
+   per the 2019 guide) — Light/Regular/Medium/Bold/ExtraBold.
+   BODY / UI          → Proxima Nova — a text-optimized humanist
+   companion supplied alongside the Display cuts.
+
+   The guide names "Helvetica Now" as the typeface; only the
+   Display family was provided, so body copy uses Proxima Nova.
+   ============================================================ */
+
+/* ---------- Helvetica Now Display ---------- */
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("4e03aa83-496f-4173-9da7-ccb323ed1342") format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("c17187ae-b1bc-43be-9af8-b07f88678ea1") format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("bef7d6f4-b832-413e-b85d-ade52402b9ea") format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("c279104b-f6f5-4467-a5d0-01f8f5703a48") format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("3126d4fd-25b3-4381-a1e4-a629419c50f0") format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Proxima Nova ---------- */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url("07d26c61-69b0-49b3-b73d-c630c7081334") format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url("09dee2d9-46bf-489e-b682-b8ac68d0bd6d") format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+</style>
+  <style>/* ============================================================
+   Twohearts — Color tokens
+   Source: Brand Guide (July 2019), slides 11–12.
+   Primary = the teal identity. Secondary = a 4-hue x 4-shade
+   accent family (red / orange / yellow / green) used sparingly
+   for illustration and status.
+   ============================================================ */
+
+:root {
+  /* ---- Primary: Twohearts teal ---- */
+  --th-teal:            #19ABB5;  /* Twohearts teal  — the brand color */
+  --th-teal-dark:       #135B64;  /* Twohearts Dark  — deep teal */
+  --th-teal-light:      #86D2DA;  /* Twohearts light */
+  --th-teal-lightest:   #EFF9FE;  /* Twohearts lightest — tint / wash */
+
+  /* ---- Secondary hues (dark / mid / light / lightest) ---- */
+  /* Red */
+  --th-red-dark:        #7F2A32;
+  --th-red:             #E9384A;
+  --th-red-light:       #F69DA5;
+  --th-red-lightest:    #FEF8FA;
+  /* Orange */
+  --th-orange-dark:     #A34023;
+  --th-orange:          #F58341;
+  --th-orange-light:    #F8C5A8;
+  --th-orange-lightest: #FFF4EF;
+  /* Yellow */
+  --th-yellow-dark:     #8E732C;
+  --th-yellow:          #EBC22D;
+  --th-yellow-light:    #F2DB90;
+  --th-yellow-lightest: #FEF9EE;
+  /* Green */
+  --th-green-dark:      #1A6B54;
+  --th-green:           #1FAE62;
+  --th-green-light:     #88CDAE;
+  --th-green-lightest:  #EDF7F3;
+
+  /* ---- Neutrals (derived; ink is a near-black used in the mark) ---- */
+  --th-ink:             #1B1B1B;  /* logotype / body text black */
+  --th-ink-2:           #4A4A4A;  /* secondary text */
+  --th-ink-3:           #7C8A8C;  /* muted / teal-grey */
+  --th-line:            #DDE7E9;  /* hairline borders (cool grey) */
+  --th-surface:         #FFFFFF;  /* base surface */
+  --th-surface-sunken:  #F4F9FA;  /* app background, cool wash */
+  --th-white:           #FFFFFF;
+
+  /* ============================================================
+     Semantic aliases — reference these in components.
+     ============================================================ */
+  --color-brand:            var(--th-teal);
+  --color-brand-strong:     var(--th-teal-dark);
+  --color-brand-soft:       var(--th-teal-light);
+  --color-brand-wash:       var(--th-teal-lightest);
+
+  --text-primary:           var(--th-ink);
+  --text-secondary:         var(--th-ink-2);
+  --text-muted:             var(--th-ink-3);
+  --text-on-brand:          var(--th-white);
+  --text-link:              var(--th-teal-dark);
+
+  --surface-page:           var(--th-surface-sunken);
+  --surface-card:           var(--th-surface);
+  --surface-brand:          var(--th-teal);
+  --surface-brand-wash:     var(--th-teal-lightest);
+
+  --border-default:         var(--th-line);
+  --border-strong:          var(--th-ink-3);
+  --border-brand:           var(--th-teal);
+
+  /* Status */
+  --color-success:          var(--th-green);
+  --color-success-wash:     var(--th-green-lightest);
+  --color-warning:          var(--th-orange);
+  --color-warning-wash:     var(--th-orange-lightest);
+  --color-caution:          var(--th-yellow);
+  --color-caution-wash:     var(--th-yellow-lightest);
+  --color-danger:           var(--th-red);
+  --color-danger-wash:      var(--th-red-lightest);
+}
+</style>
+  <style>/* ============================================================
+   Twohearts — Typography tokens
+   Brand typeface: HELVETICA NOW (substituted — see fonts.css).
+   Regular for body; Bold "when a message needs to carry weight";
+   Light for large display. Generous negative space around type
+   is a core brand instruction ("considered space … amplifies
+   the message"). The type scale nods to the brand's 1.618
+   golden-ratio motif at the display end.
+   ============================================================ */
+
+:root {
+  /* Families */
+  --font-sans: 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* Weights */
+  --fw-light:   300;  /* @kind font */
+  --fw-regular: 400;  /* @kind font */
+  --fw-medium:  500;  /* @kind font */
+  --fw-bold:    700;  /* @kind font */
+  --fw-xbold:   800;  /* @kind font */
+
+  /* Font sizes — rem based, 16px root */
+  --fs-caption: 0.75rem;   /* 12px */
+  --fs-small:   0.875rem;  /* 14px */
+  --fs-body:    1rem;      /* 16px */
+  --fs-lead:    1.125rem;  /* 18px */
+  --fs-h5:      1.25rem;   /* 20px */
+  --fs-h4:      1.5rem;    /* 24px */
+  --fs-h3:      2rem;      /* 32px */
+  --fs-h2:      2.75rem;   /* 44px */
+  --fs-h1:      3.5rem;    /* 56px */
+  --fs-display: 5.25rem;   /* 84px  ≈ 52 x 1.618 golden-ratio step */
+
+  /* Line heights */
+  --lh-tight:   1.05;  /* @kind other */
+  --lh-snug:    1.2;   /* @kind other */
+  --lh-normal:  1.5;   /* @kind other */
+  --lh-relaxed: 1.65;  /* @kind other */
+
+  /* Letter spacing — Helvetica-style display sets slightly tight */
+  --ls-tight:   -0.02em;  /* @kind other */
+  --ls-snug:    -0.01em;  /* @kind other */
+  --ls-normal:  0;        /* @kind other */
+  --ls-wide:    0.04em;   /* @kind other */
+  --ls-caps:    0.08em;   /* @kind other */
+
+  /* Semantic roles */
+  --text-display-font:   var(--font-display);
+  --text-display-weight: var(--fw-light);
+  --text-heading-font:   var(--font-sans);
+  --text-heading-weight: var(--fw-bold);
+  --text-body-font:      var(--font-sans);
+  --text-body-weight:    var(--fw-regular);
+  --text-eyebrow-weight: var(--fw-bold);
+}
+</style>
+  <style>/* ============================================================
+   Twohearts — Spacing & layout tokens
+   The brand guide specifies no numeric spacing scale, so this
+   is a clean 4px-base scale. "Negative space is a positive" and
+   "considered space around the type" are explicit brand values,
+   so components lean generous.
+   ============================================================ */
+
+:root {
+  --space-0:   0;
+  --space-1:   0.25rem;  /* 4  */
+  --space-2:   0.5rem;   /* 8  */
+  --space-3:   0.75rem;  /* 12 */
+  --space-4:   1rem;     /* 16 */
+  --space-5:   1.5rem;   /* 24 */
+  --space-6:   2rem;     /* 32 */
+  --space-7:   3rem;     /* 48 */
+  --space-8:   4rem;     /* 64 */
+  --space-9:   6rem;     /* 96 */
+
+  /* Container widths */
+  --container-sm:  640px;
+  --container-md:  960px;
+  --container-lg:  1200px;
+
+  /* Golden-ratio safe area — the brand's logo clear-space rule.
+     Clear space = width of the smaller heart in the signature. */
+  --logo-safe-area: 1.618;  /* @kind other */
+}
+</style>
+  <style>/* ============================================================
+   Twohearts — Effects: radius, shadow, borders, motion
+   The identity is built from soft, organic heart/leaf shapes,
+   so radii are friendly and generous. Shadows are soft and
+   cool-tinted (teal-grey), never harsh black.
+   ============================================================ */
+
+:root {
+  /* Corner radii — soft & friendly, echoing the rounded mark */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+  --radius-xl:   28px;
+  --radius-pill: 999px;   /* buttons & chips lean pill-shaped */
+  --radius-full: 50%;
+
+  /* Borders */
+  --border-width: 1px;         /* @kind other */
+  --border-width-strong: 1.5px; /* @kind other */
+
+  /* Shadows — soft, cool teal-grey, low opacity */
+  --shadow-xs:  0 1px 2px rgba(19, 91, 100, 0.06);
+  --shadow-sm:  0 2px 8px rgba(19, 91, 100, 0.08);
+  --shadow-md:  0 6px 20px rgba(19, 91, 100, 0.10);
+  --shadow-lg:  0 16px 40px rgba(19, 91, 100, 0.14);
+  --shadow-brand: 0 8px 24px rgba(25, 171, 181, 0.28);
+
+  /* Focus ring — teal, accessible */
+  --focus-ring: 0 0 0 3px rgba(25, 171, 181, 0.35);
+
+  /* Motion — gentle, "inviting and fun" but never bouncy-loud.
+     Ease-out for entrances, quick for interaction feedback. */
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);  /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --dur-fast:   120ms;  /* @kind other */
+  --dur-base:   200ms;  /* @kind other */
+  --dur-slow:   360ms;  /* @kind other */
+}
+</style>
+  <style>/* ============================================================
+   Twohearts Design System — global entry point.
+   Consumers link THIS file only. It is a manifest of @imports;
+   never add rules here directly.
+   ============================================================ */
+
+/* ============================================================
+   Twohearts — Fonts (self-hosted, uploaded by the brand team)
+
+   DISPLAY / HEADINGS → Helvetica Now Display (the brand typeface,
+   per the 2019 guide) — Light/Regular/Medium/Bold/ExtraBold.
+   BODY / UI          → Proxima Nova — a text-optimized humanist
+   companion supplied alongside the Display cuts.
+
+   The guide names "Helvetica Now" as the typeface; only the
+   Display family was provided, so body copy uses Proxima Nova.
+   ============================================================ */
+
+/* ---------- Helvetica Now Display ---------- */
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("4e03aa83-496f-4173-9da7-ccb323ed1342") format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("c17187ae-b1bc-43be-9af8-b07f88678ea1") format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("bef7d6f4-b832-413e-b85d-ade52402b9ea") format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("c279104b-f6f5-4467-a5d0-01f8f5703a48") format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("3126d4fd-25b3-4381-a1e4-a629419c50f0") format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Proxima Nova ---------- */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url("07d26c61-69b0-49b3-b73d-c630c7081334") format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url("09dee2d9-46bf-489e-b682-b8ac68d0bd6d") format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   Twohearts — Color tokens
+   Source: Brand Guide (July 2019), slides 11–12.
+   Primary = the teal identity. Secondary = a 4-hue x 4-shade
+   accent family (red / orange / yellow / green) used sparingly
+   for illustration and status.
+   ============================================================ */
+
+:root {
+  /* ---- Primary: Twohearts teal ---- */
+  --th-teal:            #19ABB5;  /* Twohearts teal  — the brand color */
+  --th-teal-dark:       #135B64;  /* Twohearts Dark  — deep teal */
+  --th-teal-light:      #86D2DA;  /* Twohearts light */
+  --th-teal-lightest:   #EFF9FE;  /* Twohearts lightest — tint / wash */
+
+  /* ---- Secondary hues (dark / mid / light / lightest) ---- */
+  /* Red */
+  --th-red-dark:        #7F2A32;
+  --th-red:             #E9384A;
+  --th-red-light:       #F69DA5;
+  --th-red-lightest:    #FEF8FA;
+  /* Orange */
+  --th-orange-dark:     #A34023;
+  --th-orange:          #F58341;
+  --th-orange-light:    #F8C5A8;
+  --th-orange-lightest: #FFF4EF;
+  /* Yellow */
+  --th-yellow-dark:     #8E732C;
+  --th-yellow:          #EBC22D;
+  --th-yellow-light:    #F2DB90;
+  --th-yellow-lightest: #FEF9EE;
+  /* Green */
+  --th-green-dark:      #1A6B54;
+  --th-green:           #1FAE62;
+  --th-green-light:     #88CDAE;
+  --th-green-lightest:  #EDF7F3;
+
+  /* ---- Neutrals (derived; ink is a near-black used in the mark) ---- */
+  --th-ink:             #1B1B1B;  /* logotype / body text black */
+  --th-ink-2:           #4A4A4A;  /* secondary text */
+  --th-ink-3:           #7C8A8C;  /* muted / teal-grey */
+  --th-line:            #DDE7E9;  /* hairline borders (cool grey) */
+  --th-surface:         #FFFFFF;  /* base surface */
+  --th-surface-sunken:  #F4F9FA;  /* app background, cool wash */
+  --th-white:           #FFFFFF;
+
+  /* ============================================================
+     Semantic aliases — reference these in components.
+     ============================================================ */
+  --color-brand:            var(--th-teal);
+  --color-brand-strong:     var(--th-teal-dark);
+  --color-brand-soft:       var(--th-teal-light);
+  --color-brand-wash:       var(--th-teal-lightest);
+
+  --text-primary:           var(--th-ink);
+  --text-secondary:         var(--th-ink-2);
+  --text-muted:             var(--th-ink-3);
+  --text-on-brand:          var(--th-white);
+  --text-link:              var(--th-teal-dark);
+
+  --surface-page:           var(--th-surface-sunken);
+  --surface-card:           var(--th-surface);
+  --surface-brand:          var(--th-teal);
+  --surface-brand-wash:     var(--th-teal-lightest);
+
+  --border-default:         var(--th-line);
+  --border-strong:          var(--th-ink-3);
+  --border-brand:           var(--th-teal);
+
+  /* Status */
+  --color-success:          var(--th-green);
+  --color-success-wash:     var(--th-green-lightest);
+  --color-warning:          var(--th-orange);
+  --color-warning-wash:     var(--th-orange-lightest);
+  --color-caution:          var(--th-yellow);
+  --color-caution-wash:     var(--th-yellow-lightest);
+  --color-danger:           var(--th-red);
+  --color-danger-wash:      var(--th-red-lightest);
+}
+
+/* ============================================================
+   Twohearts — Typography tokens
+   Brand typeface: HELVETICA NOW (substituted — see fonts.css).
+   Regular for body; Bold "when a message needs to carry weight";
+   Light for large display. Generous negative space around type
+   is a core brand instruction ("considered space … amplifies
+   the message"). The type scale nods to the brand's 1.618
+   golden-ratio motif at the display end.
+   ============================================================ */
+
+:root {
+  /* Families */
+  --font-sans: 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* Weights */
+  --fw-light:   300;  /* @kind font */
+  --fw-regular: 400;  /* @kind font */
+  --fw-medium:  500;  /* @kind font */
+  --fw-bold:    700;  /* @kind font */
+  --fw-xbold:   800;  /* @kind font */
+
+  /* Font sizes — rem based, 16px root */
+  --fs-caption: 0.75rem;   /* 12px */
+  --fs-small:   0.875rem;  /* 14px */
+  --fs-body:    1rem;      /* 16px */
+  --fs-lead:    1.125rem;  /* 18px */
+  --fs-h5:      1.25rem;   /* 20px */
+  --fs-h4:      1.5rem;    /* 24px */
+  --fs-h3:      2rem;      /* 32px */
+  --fs-h2:      2.75rem;   /* 44px */
+  --fs-h1:      3.5rem;    /* 56px */
+  --fs-display: 5.25rem;   /* 84px  ≈ 52 x 1.618 golden-ratio step */
+
+  /* Line heights */
+  --lh-tight:   1.05;  /* @kind other */
+  --lh-snug:    1.2;   /* @kind other */
+  --lh-normal:  1.5;   /* @kind other */
+  --lh-relaxed: 1.65;  /* @kind other */
+
+  /* Letter spacing — Helvetica-style display sets slightly tight */
+  --ls-tight:   -0.02em;  /* @kind other */
+  --ls-snug:    -0.01em;  /* @kind other */
+  --ls-normal:  0;        /* @kind other */
+  --ls-wide:    0.04em;   /* @kind other */
+  --ls-caps:    0.08em;   /* @kind other */
+
+  /* Semantic roles */
+  --text-display-font:   var(--font-display);
+  --text-display-weight: var(--fw-light);
+  --text-heading-font:   var(--font-sans);
+  --text-heading-weight: var(--fw-bold);
+  --text-body-font:      var(--font-sans);
+  --text-body-weight:    var(--fw-regular);
+  --text-eyebrow-weight: var(--fw-bold);
+}
+
+/* ============================================================
+   Twohearts — Spacing & layout tokens
+   The brand guide specifies no numeric spacing scale, so this
+   is a clean 4px-base scale. "Negative space is a positive" and
+   "considered space around the type" are explicit brand values,
+   so components lean generous.
+   ============================================================ */
+
+:root {
+  --space-0:   0;
+  --space-1:   0.25rem;  /* 4  */
+  --space-2:   0.5rem;   /* 8  */
+  --space-3:   0.75rem;  /* 12 */
+  --space-4:   1rem;     /* 16 */
+  --space-5:   1.5rem;   /* 24 */
+  --space-6:   2rem;     /* 32 */
+  --space-7:   3rem;     /* 48 */
+  --space-8:   4rem;     /* 64 */
+  --space-9:   6rem;     /* 96 */
+
+  /* Container widths */
+  --container-sm:  640px;
+  --container-md:  960px;
+  --container-lg:  1200px;
+
+  /* Golden-ratio safe area — the brand's logo clear-space rule.
+     Clear space = width of the smaller heart in the signature. */
+  --logo-safe-area: 1.618;  /* @kind other */
+}
+
+/* ============================================================
+   Twohearts — Effects: radius, shadow, borders, motion
+   The identity is built from soft, organic heart/leaf shapes,
+   so radii are friendly and generous. Shadows are soft and
+   cool-tinted (teal-grey), never harsh black.
+   ============================================================ */
+
+:root {
+  /* Corner radii — soft & friendly, echoing the rounded mark */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+  --radius-xl:   28px;
+  --radius-pill: 999px;   /* buttons & chips lean pill-shaped */
+  --radius-full: 50%;
+
+  /* Borders */
+  --border-width: 1px;         /* @kind other */
+  --border-width-strong: 1.5px; /* @kind other */
+
+  /* Shadows — soft, cool teal-grey, low opacity */
+  --shadow-xs:  0 1px 2px rgba(19, 91, 100, 0.06);
+  --shadow-sm:  0 2px 8px rgba(19, 91, 100, 0.08);
+  --shadow-md:  0 6px 20px rgba(19, 91, 100, 0.10);
+  --shadow-lg:  0 16px 40px rgba(19, 91, 100, 0.14);
+  --shadow-brand: 0 8px 24px rgba(25, 171, 181, 0.28);
+
+  /* Focus ring — teal, accessible */
+  --focus-ring: 0 0 0 3px rgba(25, 171, 181, 0.35);
+
+  /* Motion — gentle, "inviting and fun" but never bouncy-loud.
+     Ease-out for entrances, quick for interaction feedback. */
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);  /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --dur-fast:   120ms;  /* @kind other */
+  --dur-base:   200ms;  /* @kind other */
+  --dur-slow:   360ms;  /* @kind other */
+}
+
+</style>
+  <script src="ab006487-3978-401d-aef8-826d6dc3a84a"></script>
+  <style>
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--surface-card,#fff);color:var(--th-ink,#1B1B1B);font-family:var(--font-sans,'Proxima Nova',Helvetica,Arial,sans-serif);line-height:1.55;-webkit-font-smoothing:antialiased}
+    a{color:var(--th-teal-dark,#135B64)}
+    a:hover{color:var(--th-teal,#19ABB5)}
+  </style>
+</helmet>
+
+<!-- ============ HEADER ============ -->
+<header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--th-line)">
+  <div style="max-width: 1080px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 66px">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <img src="a90316fd-e042-4922-8199-25ad5741625d" alt="Twohearts" style="height: 26px; display: block">
+      <span style="color: var(--th-ink-3); font-weight: 400; font-size: 15px">✕</span>
+      <span style="font-family: var(--font-display); font-weight: 700; font-size: 17px; color: {{ kfcRed }}; letter-spacing: -.01em">KFC Vietnam</span>
+    </div>
+    <div style="font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--th-ink-3)">Agentic AI Build Week 2026 &nbsp;·&nbsp; F&amp;B track &nbsp;·&nbsp; Problem P4</div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section style="background: var(--th-teal-lightest); padding: 92px 0 76px">
+  <div style="max-width: 1080px; margin: 0 auto; padding: 0 24px">
+    <div style="font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--th-teal-dark); margin-bottom: 18px">Agentic ordering · chat + voice</div>
+    <h1 style="margin: 0; font-family: var(--font-display); font-weight: 300; font-size: clamp(36px, 5.2vw, 62px); line-height: 1.08; letter-spacing: -.02em; max-width: 920px; color: var(--th-ink)">Every KFC conversation becomes a completed order — <span style="font-weight: 500; color: {{ kfcRed }}">in Vietnamese, with zero staff.</span></h1>
+    <p style="font-size: 18px; color: var(--th-ink-2); max-width: 760px; margin: 22px 0 0">An <b>agentic AI ordering assistant across chat and voice</b> — Messenger, Zalo, the KFC app, and inbound calls. It understands natural Vietnamese, spoken or typed, places the order, applies vouchers, checks loyalty points, and hands off to a human when needed — firing the order straight into the OMS.</p>
+    <div style="display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap">
+      <a href="#demo" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; border-radius: 999px; padding: 14px 28px; text-decoration: none; background: {{ kfcRed }}; color: #fff; box-shadow: var(--shadow-sm); transition: filter 120ms" style-hover="filter: brightness(1.08)" style-active="transform: scale(0.97)">▶&nbsp; Watch the demo</a>
+      <a href="#" style="display: inline-flex; align-items: center; font-weight: 700; font-size: 15px; border-radius: 999px; padding: 14px 28px; text-decoration: none; border: 1.5px solid var(--th-teal); color: var(--th-teal-dark); transition: background 120ms" style-hover="background: rgba(25,171,181,.10); color: var(--th-teal-dark)" style-active="transform: scale(0.97)">Try the live agent</a>
+    </div>
+    <div style="margin-top: 26px; font-size: 13px; color: var(--th-ink-3); font-weight: 600">Built for KFC Vietnam · AABW 2026 · Problem P4: AI-powered conversational ordering via chat</div>
+  </div>
+</section>
+
+<!-- ============ DEMO VIDEO ============ -->
+<section id="demo" style="padding: 72px 0" data-screen-label="Demo">
+  <div style="max-width: 1080px; margin: 0 auto; padding: 0 24px">
+    <div style="font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--th-teal-dark); margin-bottom: 14px">The demo</div>
+    <h2 style="margin: 0; font-family: var(--font-display); font-weight: 300; font-size: clamp(26px, 3.6vw, 42px); line-height: 1.12; letter-spacing: -.015em; color: var(--th-ink)">One order. Voice and chat, working as one agent.</h2>
+    <p style="font-size: 17px; color: var(--th-ink-2); max-width: 820px; margin: 14px 0 0">A returning customer calls KFC, reorders last time's meal plus a Rice &amp; Chicken combo — and the agent closes the order across voice and Zalo without a human touching it.</p>
+
+    <div style="margin-top: 32px">
+      <div style="position: relative; aspect-ratio: 16/9; background: var(--th-teal-dark); border-radius: 18px; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lg)">
+        <sc-if value="{{ showTexture }}" hint-placeholder-val="{{ true }}">
+          <div style="position: absolute; inset: 0; background-image: url(&quot;4da53cbc-197b-45a4-9c46-bcff00516303&quot;); opacity: .12; pointer-events: none"></div>
+        </sc-if>
+        <div style="position: relative; color: rgba(255,255,255,.65); text-align: center; padding: 24px; font-size: 13px">
+          <div style="width: 74px; height: 74px; border-radius: 50%; background: {{ kfcRed }}; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #fff; font-size: 26px; box-shadow: var(--shadow-md)">▶</div>
+          <strong style="color: #fff; display: block; font-size: 17px; margin-bottom: 6px; font-family: var(--font-display); font-weight: 500">Demo video goes here</strong>
+          Voice re-order + voucher + Zalo confirmation · 16:9
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px">
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 20px 22px; box-shadow: var(--shadow-xs)">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--th-teal); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 12px">1</div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 700">Customer calls KFC</h4>
+        <p style="font-size: 13px; color: var(--th-ink-2); margin: 5px 0 0">“Cho mình đặt lại đơn lần trước, thêm 1 combo cơm gà nha.” Reorder of the last order, plus a Rice &amp; Chicken combo.</p>
+        <span style="font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-top: 10px; display: inline-block; color: var(--th-teal-dark)">Voice</span>
+      </div>
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 20px 22px; box-shadow: var(--shadow-xs)">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--th-teal); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 12px">2</div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 700">Agent recognizes &amp; upsells nothing — it remembers</h4>
+        <p style="font-size: 13px; color: var(--th-ink-2); margin: 5px 0 0">The agent knows her last order and adds the new combo. No menu reading, no hold music.</p>
+        <span style="font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-top: 10px; display: inline-block; color: var(--th-teal-dark)">Voice</span>
+      </div>
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 20px 22px; box-shadow: var(--shadow-xs)">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--th-teal); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 12px">3</div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 700">Voucher, offered proactively</h4>
+        <p style="font-size: 13px; color: var(--th-ink-2); margin: 5px 0 0">The agent sees an unused voucher on her account and asks — by voice — if she’d like to apply it.</p>
+        <span style="font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-top: 10px; display: inline-block; color: var(--th-teal-dark)">Voice</span>
+      </div>
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 20px 22px; box-shadow: var(--shadow-xs)">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: {{ kfcRed }}; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 12px">4</div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 700">Order summary lands on Zalo</h4>
+        <p style="font-size: 13px; color: var(--th-ink-2); margin: 5px 0 0">Items, voucher, total, address — one tap to confirm. Voice and chat are the same agent, same memory.</p>
+        <span style="font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-top: 10px; display: inline-block; color: {{ kfcRed }}">Chat</span>
+      </div>
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 20px 22px; box-shadow: var(--shadow-xs)">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: {{ kfcRed }}; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 12px">5</div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 700">She hits confirm</h4>
+        <p style="font-size: 13px; color: var(--th-ink-2); margin: 5px 0 0">The agent acknowledges the confirmation on the call and says it will notify her when the order is on the way.</p>
+        <span style="font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-top: 10px; display: inline-block; color: {{ kfcRed }}">Chat + voice</span>
+      </div>
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 20px 22px; box-shadow: var(--shadow-xs)">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--th-ink); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 12px">6</div>
+        <h4 style="margin: 0; font-size: 15px; font-weight: 700">The reveal</h4>
+        <p style="font-size: 13px; color: var(--th-ink-2); margin: 5px 0 0">On hang-up: the entire order was handled by an AI agent. No human ever picked up.</p>
+        <span style="font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-top: 10px; display: inline-block; color: var(--th-ink)">Agentic</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section style="position: relative; background: var(--th-teal-dark); color: #fff; padding: 72px 0; overflow: hidden" data-screen-label="Problem">
+  <sc-if value="{{ showTexture }}" hint-placeholder-val="{{ true }}">
+    <div style="position: absolute; inset: 0; background-image: url(&quot;4da53cbc-197b-45a4-9c46-bcff00516303&quot;); opacity: .10; pointer-events: none"></div>
+  </sc-if>
+  <div style="position: relative; max-width: 1080px; margin: 0 auto; padding: 0 24px">
+    <div style="font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--th-teal-light); margin-bottom: 14px">The problem · P4</div>
+    <h2 style="margin: 0; font-family: var(--font-display); font-weight: 300; font-size: clamp(26px, 3.6vw, 42px); line-height: 1.12; letter-spacing: -.015em; color: #fff; max-width: 860px">KFC Vietnam handles conversational ordering 100% by human staff today.</h2>
+    <p style="font-size: 17px; color: rgba(255,255,255,.72); max-width: 820px; margin: 14px 0 0">High-intent customers message on Messenger and Zalo ready to buy — then get pushed to a separate app or tie up a call-center agent. That is lost conversion and rising labor cost on the most ready-to-buy traffic KFC has.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 32px">
+      <div style="background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 22px 24px">
+        <div style="font-family: var(--font-display); font-size: 38px; font-weight: 300; color: var(--th-teal-light)">100%</div>
+        <p style="font-size: 13.5px; color: rgba(255,255,255,.72); margin: 6px 0 0">of conversational orders are handled manually by staff today.</p>
+      </div>
+      <div style="background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 22px 24px">
+        <div style="font-family: var(--font-display); font-size: 38px; font-weight: 300; color: var(--th-teal-light)">0</div>
+        <p style="font-size: 13.5px; color: rgba(255,255,255,.72); margin: 6px 0 0">orders, vouchers, or loyalty checks possible through natural-language chat.</p>
+      </div>
+      <div style="background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 22px 24px">
+        <div style="font-family: var(--font-display); font-size: 38px; font-weight: 300; color: var(--th-teal-light)">2 inputs</div>
+        <p style="font-size: 13.5px; color: rgba(255,255,255,.72); margin: 6px 0 0">customers already use — messages and phone calls. Neither converts on its own.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PIPELINE ============ -->
+<section style="padding: 72px 0; background: var(--th-surface-sunken)" data-screen-label="Pipeline">
+  <div style="max-width: 1080px; margin: 0 auto; padding: 0 24px">
+    <div style="font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--th-teal-dark); margin-bottom: 14px">What we built</div>
+    <h2 style="margin: 0; font-family: var(--font-display); font-weight: 300; font-size: clamp(26px, 3.6vw, 42px); line-height: 1.12; letter-spacing: -.015em; color: var(--th-ink)">The agentic ordering pipeline.</h2>
+    <div style="display: grid; grid-template-columns: 1.25fr auto 1fr auto 1.35fr auto 1fr; gap: 10px; align-items: stretch; margin-top: 32px">
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; justify-content: center; box-shadow: var(--shadow-xs)">
+        <div style="font-size: 10px; font-weight: 700; letter-spacing: .12em; color: var(--th-ink-3)">TWO INPUTS</div>
+        <div style="border-left: 3px solid {{ kfcRed }}; padding-left: 9px; margin-top: 8px">
+          <b style="font-size: 13.5px">Messages</b>
+          <small style="display: block; font-size: 11px; color: var(--th-ink-3)">Messenger · Zalo · app chat</small>
+        </div>
+        <div style="border-left: 3px solid var(--th-teal); padding-left: 9px; margin-top: 8px">
+          <b style="font-size: 13.5px">Voice</b>
+          <small style="display: block; font-size: 11px; color: var(--th-ink-3)">Inbound calls &amp; voice notes</small>
+        </div>
+      </div>
+      <div style="align-self: center; color: var(--th-teal); font-weight: 700; font-size: 20px">→</div>
+      <div style="background: var(--th-teal-lightest); border: 1.5px solid var(--th-teal); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 6px">
+        <img src="e500dbcd-af33-4217-8789-f776ab076312" alt="" style="height: 20px; width: auto; align-self: flex-start">
+        <h4 style="margin: 0; font-size: 14.5px; font-weight: 700; color: var(--th-teal-dark)">Twohearts agent</h4>
+        <small style="font-size: 12px; color: var(--th-ink-3)">Vietnamese NLU + tool use</small>
+      </div>
+      <div style="align-self: center; color: var(--th-teal); font-weight: 700; font-size: 20px">→</div>
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; justify-content: center; box-shadow: var(--shadow-xs)">
+        <h4 style="margin: 0; font-size: 11px; letter-spacing: .08em; color: var(--th-ink-3); font-weight: 700">TAKES REAL ACTIONS VIA KFC APIs</h4>
+        <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px">
+          <span style="font-size: 11.5px; font-weight: 700; background: {{ kfcRed }}; color: #fff; border-radius: 999px; padding: 4px 12px">Place order → OMS</span>
+          <span style="font-size: 11.5px; font-weight: 700; background: {{ kfcRed }}; color: #fff; border-radius: 999px; padding: 4px 12px">Apply voucher</span>
+          <span style="font-size: 11.5px; font-weight: 700; background: {{ kfcRed }}; color: #fff; border-radius: 999px; padding: 4px 12px">Check loyalty</span>
+          <span style="font-size: 11.5px; font-weight: 700; background: {{ kfcRed }}; color: #fff; border-radius: 999px; padding: 4px 12px">Escalate to staff</span>
+        </div>
+      </div>
+      <div style="align-self: center; color: var(--th-teal); font-weight: 700; font-size: 20px">→</div>
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; justify-content: center; box-shadow: var(--shadow-xs)">
+        <h4 style="margin: 0; font-size: 14.5px; font-weight: 700">Order confirmed</h4>
+        <small style="font-size: 12px; color: var(--th-ink-3); margin-top: 3px">Kitchen / OMS</small>
+      </div>
+    </div>
+    <p style="margin: 18px 0 0; font-size: 13.5px; font-style: italic; color: var(--th-ink-3)"><b style="color: var(--th-ink); font-style: normal">Agentic core:</b> the AI does not just reply — it calls KFC’s live systems to complete real actions, then confirms.</p>
+  </div>
+</section>
+
+<!-- ============ METRICS + WORKFLOW ============ -->
+<section style="padding: 72px 0" data-screen-label="Metrics">
+  <div style="max-width: 1080px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px">
+    <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 26px 28px; box-shadow: var(--shadow-sm)">
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--th-teal-dark); margin-bottom: 10px">P4 success metrics — delivered</div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--th-line)">
+        <div style="flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--th-green); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px">✓</div>
+        <p style="margin: 0; font-size: 14.5px; color: var(--th-ink-2)"><b style="color: var(--th-ink)">Order completion.</b> Natural-language order taken end-to-end and pushed into the OMS — no app switch, no manual re-entry.</p>
+      </div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--th-line)">
+        <div style="flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--th-green); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px">✓</div>
+        <p style="margin: 0; font-size: 14.5px; color: var(--th-ink-2)"><b style="color: var(--th-ink)">Voucher application.</b> Validates and applies KFC promo codes inside the conversation, with the discounted total confirmed back.</p>
+      </div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--th-line)">
+        <div style="flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--th-green); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px">✓</div>
+        <p style="margin: 0; font-size: 14.5px; color: var(--th-ink-2)"><b style="color: var(--th-ink)">NLU accuracy.</b> Understands real Vietnamese speech and text — slang, accents, missing tone marks. Low-confidence turns route to a human.</p>
+      </div>
+      <div style="display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--th-line)">
+        <div style="flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--th-green); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px">✓</div>
+        <p style="margin: 0; font-size: 14.5px; color: var(--th-ink-2)"><b style="color: var(--th-ink)">Loyalty point inquiry.</b> Queries the loyalty API in-conversation, returns the balance, and redeems points against the order.</p>
+      </div>
+      <div style="display: flex; gap: 12px; padding: 12px 0">
+        <div style="flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--th-green); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px">✓</div>
+        <p style="margin: 0; font-size: 14.5px; color: var(--th-ink-2)"><b style="color: var(--th-ink)">Order by channel.</b> One agent across chat and voice — Messenger, Zalo, web and inbound calls — with unified customer memory.</p>
+      </div>
+    </div>
+    <div style="background: var(--th-teal-lightest); border: 1px solid var(--th-line); border-radius: 18px; padding: 26px 28px">
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--th-ink-3); margin-bottom: 10px">No changes to existing workflow</div>
+      <p style="margin: 0; font-size: 14.5px; color: var(--th-ink)">Connects to the exact systems named in the brief — <b>no additional equipment, no changes to KFC store workflow.</b></p>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 18px">
+        <span style="font-size: 11.5px; font-weight: 700; background: var(--th-teal-dark); color: #fff; border-radius: 999px; padding: 4px 12px">Messenger</span>
+        <span style="font-size: 11.5px; font-weight: 700; background: var(--th-teal-dark); color: #fff; border-radius: 999px; padding: 4px 12px">Zalo</span>
+        <span style="font-size: 11.5px; font-weight: 700; background: var(--th-teal-dark); color: #fff; border-radius: 999px; padding: 4px 12px">Mobile app</span>
+        <span style="font-size: 11.5px; font-weight: 700; background: var(--th-teal-dark); color: #fff; border-radius: 999px; padding: 4px 12px">OMS</span>
+        <span style="font-size: 11.5px; font-weight: 700; background: var(--th-teal-dark); color: #fff; border-radius: 999px; padding: 4px 12px">Loyalty</span>
+      </div>
+      <p style="margin: 0; font-size: 14px; color: var(--th-ink)"><b style="color: {{ kfcRed }}">Guardrails.</b> Constrained to KFC’s live menu &amp; voucher data — never invents items or prices. Confirms before committing an order; escalates on low confidence.</p>
+      <p style="margin: 12px 0 0; font-size: 14px; color: var(--th-ink)"><b style="color: {{ kfcRed }}">Data.</b> Customer identity and history stay in KFC’s ownership.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING FRAMING ============ -->
+<section style="padding: 72px 0; background: var(--th-surface-sunken); border-top: 1px solid var(--th-line); border-bottom: 1px solid var(--th-line)" data-screen-label="Economics">
+  <div style="max-width: 1080px; margin: 0 auto; padding: 0 24px">
+    <div style="font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--th-teal-dark); margin-bottom: 14px">The economics</div>
+    <p style="margin: 0; font-family: var(--font-display); font-weight: 300; font-size: clamp(24px, 3.2vw, 34px); line-height: 1.25; letter-spacing: -.01em; max-width: 880px; color: var(--th-ink)">KFC pays a small per-order <span style="font-weight: 500; color: {{ kfcRed }}">processing cost</span> — like a payment-processing fee — <span style="font-weight: 500; color: {{ kfcRed }}">not a percentage commission</span> on the basket.</p>
+    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px">
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 18px 22px; flex: 1; min-width: 220px; box-shadow: var(--shadow-xs)">
+        <h4 style="margin: 0; font-size: 14px; font-weight: 700">Priced per order processed</h4>
+        <p style="font-size: 13px; color: var(--th-ink-2); margin: 5px 0 0">Cost scales with usage, not with basket size. A bucket meal and a snack cost the same to process.</p>
+      </div>
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 18px 22px; flex: 1; min-width: 220px; box-shadow: var(--shadow-xs)">
+        <h4 style="margin: 0; font-size: 14px; font-weight: 700">Cents, not percent</h4>
+        <p style="font-size: 13px; color: var(--th-ink-2); margin: 5px 0 0">Order value stays with KFC. The economics of a direct channel, at the cost of infrastructure.</p>
+      </div>
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 18px 22px; flex: 1; min-width: 220px; box-shadow: var(--shadow-xs)">
+        <h4 style="margin: 0; font-size: 14px; font-weight: 700">Zero added headcount</h4>
+        <p style="font-size: 13px; color: var(--th-ink-2); margin: 5px 0 0">24/7 coverage across chat and voice with no additional call-center staffing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY REAL ============ -->
+<section style="padding: 72px 0" data-screen-label="Why real">
+  <div style="max-width: 1080px; margin: 0 auto; padding: 0 24px">
+    <div style="font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--th-teal-dark); margin-bottom: 14px">Why it’s real, not a prototype</div>
+    <h2 style="margin: 0; font-family: var(--font-display); font-weight: 300; font-size: clamp(26px, 3.6vw, 42px); line-height: 1.12; letter-spacing: -.015em; color: var(--th-ink)">Live in a real restaurant today.</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 30px">
+      <div style="background: var(--th-teal-lightest); border: 1.5px solid var(--th-teal); border-radius: 18px; padding: 22px 24px">
+        <h3 style="margin: 0 0 6px; font-family: var(--font-display); font-size: 24px; font-weight: 500; color: var(--th-teal-dark)">60% direct</h3>
+        <p style="margin: 0; font-size: 14px; color: var(--th-ink-2)">The Joi Factory takes 60% of delivery orders directly on Messenger and Zalo — on this engine, in production.</p>
+      </div>
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 22px 24px; box-shadow: var(--shadow-xs)">
+        <h3 style="margin: 0 0 6px; font-size: 16px; font-weight: 700">Built this week</h3>
+        <p style="margin: 0; font-size: 14px; color: var(--th-ink-2)">The KFC agent — your menu, voucher rules, loyalty &amp; OMS handoff. Voice AI. (Core engine is our existing IP.)</p>
+      </div>
+      <div style="background: var(--surface-card); border: 1px solid var(--th-line); border-radius: 18px; padding: 22px 24px; box-shadow: var(--shadow-xs)">
+        <h3 style="margin: 0 0 6px; font-size: 16px; font-weight: 700">Operator team</h3>
+        <p style="margin: 0; font-size: 14px; color: var(--th-ink-2)">We ran a 50+ location, 750-staff hospitality group before building this. 12 years of conversational commerce experience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER / ASK ============ -->
+<footer style="position: relative; background: var(--th-teal-dark); color: #fff; padding: 64px 0 44px; overflow: hidden" data-screen-label="The ask">
+  <sc-if value="{{ showTexture }}" hint-placeholder-val="{{ true }}">
+    <div style="position: absolute; inset: 0; background-image: url(&quot;4da53cbc-197b-45a4-9c46-bcff00516303&quot;); opacity: .10; pointer-events: none"></div>
+  </sc-if>
+  <div style="position: relative; max-width: 1080px; margin: 0 auto; padding: 0 24px">
+    <div style="font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--th-teal-light); margin-bottom: 14px">The ask</div>
+    <h2 style="margin: 0; font-family: var(--font-display); font-weight: 300; font-size: clamp(26px, 3.6vw, 42px); line-height: 1.12; letter-spacing: -.015em; color: #fff">Ready to pilot with <span style="font-weight: 500; color: #FF8296">KFC Vietnam.</span></h2>
+    <p style="font-size: 14px; color: rgba(255,255,255,.72); margin: 20px 0 0; line-height: 1.9">
+      <b style="color: #fff">Thu Nguyen</b> CEO &nbsp;·&nbsp; <b style="color: #fff">Nikhil Sharma</b> CTO &nbsp;·&nbsp; <b style="color: #fff">Nhan Tran</b> AI Lead<br>
+      <b style="color: #fff">Danh Le</b> AI Engineer &nbsp;·&nbsp; <b style="color: #fff">Anh Tran</b> Data Engineer &nbsp;·&nbsp; <b style="color: #fff">Tam Phi</b> Front End<br>
+      chat@twohearts.vn &nbsp;·&nbsp; twohearts.vn
+    </p>
+    <div style="display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap">
+      <a href="#" style="font-size: 13px; font-weight: 700; border: 1.5px solid rgba(255,255,255,.35); border-radius: 999px; padding: 10px 20px; color: #fff; text-decoration: none; transition: border-color 120ms" style-hover="border-color: #fff; color: #fff">▶ Live demo</a>
+      <a href="#" style="font-size: 13px; font-weight: 700; border: 1.5px solid rgba(255,255,255,.35); border-radius: 999px; padding: 10px 20px; color: #fff; text-decoration: none; transition: border-color 120ms" style-hover="border-color: #fff; color: #fff">GitHub repo</a>
+      <a href="#" style="font-size: 13px; font-weight: 700; border: 1.5px solid rgba(255,255,255,.35); border-radius: 999px; padding: 10px 20px; color: #fff; text-decoration: none; transition: border-color 120ms" style-hover="border-color: #fff; color: #fff">Judge one-pager (PDF)</a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px; margin-top: 38px">
+      <img src="086a915a-7267-4173-99e0-b27128d8f3cb" alt="Twohearts" style="height: 20px; display: block; opacity: .9">
+      <span style="color: rgba(255,255,255,.4); font-size: 13px">✕</span>
+      <span style="font-family: var(--font-display); font-weight: 700; font-size: 14px; color: rgba(255,255,255,.9)">KFC Vietnam</span>
+    </div>
+    <p style="margin: 16px 0 0; font-size: 11.5px; color: rgba(255,255,255,.5)">Twohearts Technologies × KFC Vietnam · Agentic AI Build Week 2026 · F&amp;B track, Problem P4. Concept demo built for the hackathon; KFC branding used in the context of the KFC Vietnam problem brief.</p>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{
+  &quot;kfcRed&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#E4002B&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#E4002B&quot;, &quot;#B80023&quot;, &quot;#E9384A&quot;], &quot;section&quot;: &quot;Co-brand&quot;},
+  &quot;showTexture&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Co-brand&quot;}
+}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      kfcRed: this.props.kfcRed ?? '#E4002B',
+      showTexture: this.props.showTexture ?? true,
+    };
+  }
+}
+</script>
+
+
+</body></html>

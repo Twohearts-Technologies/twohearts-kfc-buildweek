@@ -1,0 +1,288 @@
+/* ============================================================
+   Twohearts Design System — ported from the KFC demo template.
+   Fonts self-hosted (relative url() so Vite fingerprints them),
+   full --th-* / --font-* token system, global rules, and the
+   :hover / :active utility classes for CTAs and links.
+   ============================================================ */
+
+/* ---------- Helvetica Now Display ---------- */
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("../assets/fonts/HelveticaNowDisplay-Light.otf") format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("../assets/fonts/HelveticaNowDisplay-Regular.otf") format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("../assets/fonts/HelveticaNowDisplay-Medium.otf") format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("../assets/fonts/HelveticaNowDisplay-Bold.otf") format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url("../assets/fonts/HelveticaNowDisplay-ExtraBold.otf") format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Proxima Nova ---------- */
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url("../assets/fonts/ProximaNova-Regular.ttf") format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url("../assets/fonts/ProximaNova-Bold.ttf") format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   Color tokens — Brand Guide (July 2019), slides 11–12.
+   ============================================================ */
+:root {
+  /* ---- Primary: Twohearts teal ---- */
+  --th-teal:            #19ABB5;
+  --th-teal-dark:       #135B64;
+  --th-teal-light:      #86D2DA;
+  --th-teal-lightest:   #EFF9FE;
+
+  /* ---- Secondary hues (dark / mid / light / lightest) ---- */
+  --th-red-dark:        #7F2A32;
+  --th-red:             #E9384A;
+  --th-red-light:       #F69DA5;
+  --th-red-lightest:    #FEF8FA;
+  --th-orange-dark:     #A34023;
+  --th-orange:          #F58341;
+  --th-orange-light:    #F8C5A8;
+  --th-orange-lightest: #FFF4EF;
+  --th-yellow-dark:     #8E732C;
+  --th-yellow:          #EBC22D;
+  --th-yellow-light:    #F2DB90;
+  --th-yellow-lightest: #FEF9EE;
+  --th-green-dark:      #1A6B54;
+  --th-green:           #1FAE62;
+  --th-green-light:     #88CDAE;
+  --th-green-lightest:  #EDF7F3;
+
+  /* ---- Neutrals ---- */
+  --th-ink:             #1B1B1B;
+  --th-ink-2:           #4A4A4A;
+  --th-ink-3:           #7C8A8C;
+  --th-line:            #DDE7E9;
+  --th-surface:         #FFFFFF;
+  --th-surface-sunken:  #F4F9FA;
+  --th-white:           #FFFFFF;
+
+  /* ---- Semantic aliases ---- */
+  --color-brand:            var(--th-teal);
+  --color-brand-strong:     var(--th-teal-dark);
+  --color-brand-soft:       var(--th-teal-light);
+  --color-brand-wash:       var(--th-teal-lightest);
+
+  --text-primary:           var(--th-ink);
+  --text-secondary:         var(--th-ink-2);
+  --text-muted:             var(--th-ink-3);
+  --text-on-brand:          var(--th-white);
+  --text-link:              var(--th-teal-dark);
+
+  --surface-page:           var(--th-surface-sunken);
+  --surface-card:           var(--th-surface);
+  --surface-brand:          var(--th-teal);
+  --surface-brand-wash:     var(--th-teal-lightest);
+
+  --border-default:         var(--th-line);
+  --border-strong:          var(--th-ink-3);
+  --border-brand:           var(--th-teal);
+
+  /* Status */
+  --color-success:          var(--th-green);
+  --color-success-wash:     var(--th-green-lightest);
+  --color-warning:          var(--th-orange);
+  --color-warning-wash:     var(--th-orange-lightest);
+  --color-caution:          var(--th-yellow);
+  --color-caution-wash:     var(--th-yellow-lightest);
+  --color-danger:           var(--th-red);
+  --color-danger-wash:      var(--th-red-lightest);
+
+  /* ============================================================
+     Typography tokens
+     ============================================================ */
+  --font-sans: 'Proxima Nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  --fw-light:   300;
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-bold:    700;
+  --fw-xbold:   800;
+
+  --fs-caption: 0.75rem;
+  --fs-small:   0.875rem;
+  --fs-body:    1rem;
+  --fs-lead:    1.125rem;
+  --fs-h5:      1.25rem;
+  --fs-h4:      1.5rem;
+  --fs-h3:      2rem;
+  --fs-h2:      2.75rem;
+  --fs-h1:      3.5rem;
+  --fs-display: 5.25rem;
+
+  --lh-tight:   1.05;
+  --lh-snug:    1.2;
+  --lh-normal:  1.5;
+  --lh-relaxed: 1.65;
+
+  --ls-tight:   -0.02em;
+  --ls-snug:    -0.01em;
+  --ls-normal:  0;
+  --ls-wide:    0.04em;
+  --ls-caps:    0.08em;
+
+  --text-display-font:   var(--font-display);
+  --text-display-weight: var(--fw-light);
+  --text-heading-font:   var(--font-sans);
+  --text-heading-weight: var(--fw-bold);
+  --text-body-font:      var(--font-sans);
+  --text-body-weight:    var(--fw-regular);
+  --text-eyebrow-weight: var(--fw-bold);
+
+  /* ============================================================
+     Spacing & layout tokens
+     ============================================================ */
+  --space-0:   0;
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.5rem;
+  --space-6:   2rem;
+  --space-7:   3rem;
+  --space-8:   4rem;
+  --space-9:   6rem;
+
+  --container-sm:  640px;
+  --container-md:  960px;
+  --container-lg:  1200px;
+
+  --logo-safe-area: 1.618;
+
+  /* ============================================================
+     Effects: radius, shadow, borders, motion
+     ============================================================ */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+  --radius-xl:   28px;
+  --radius-pill: 999px;
+  --radius-full: 50%;
+
+  --border-width: 1px;
+  --border-width-strong: 1.5px;
+
+  --shadow-xs:  0 1px 2px rgba(19, 91, 100, 0.06);
+  --shadow-sm:  0 2px 8px rgba(19, 91, 100, 0.08);
+  --shadow-md:  0 6px 20px rgba(19, 91, 100, 0.10);
+  --shadow-lg:  0 16px 40px rgba(19, 91, 100, 0.14);
+  --shadow-brand: 0 8px 24px rgba(25, 171, 181, 0.28);
+
+  --focus-ring: 0 0 0 3px rgba(25, 171, 181, 0.35);
+
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   120ms;
+  --dur-base:   200ms;
+  --dur-slow:   360ms;
+}
+
+/* ============================================================
+   Global rules (scoped to the KFC page root)
+   ============================================================ */
+html { scroll-behavior: smooth; }
+
+.kfc-page {
+  background: var(--surface-card, #fff);
+  color: var(--th-ink, #1B1B1B);
+  font-family: var(--font-sans, 'Proxima Nova', Helvetica, Arial, sans-serif);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.kfc-page a { color: var(--th-teal-dark, #135B64); }
+.kfc-page a:hover { color: var(--th-teal, #19ABB5); }
+
+/* ============================================================
+   Interaction utilities — translated from the template's
+   style-hover / style-active attributes.
+   ============================================================ */
+
+/* Primary CTA (filled KFC red) */
+.th-cta-primary {
+  transition: filter 120ms;
+}
+.th-cta-primary:hover { filter: brightness(1.08); }
+.th-cta-primary:active { transform: scale(0.97); }
+
+/* Secondary CTA (teal outline) */
+.th-cta-secondary {
+  transition: background 120ms;
+}
+.th-cta-secondary:hover { background: rgba(25, 171, 181, 0.10); }
+.th-cta-secondary:active { transform: scale(0.97); }
+
+/* Ghost link buttons on the dark footer */
+.th-ghost-link {
+  transition: border-color 120ms;
+}
+.th-ghost-link:hover { border-color: #fff; color: #fff; }
+
+/* ============================================================
+   Pipeline grid — 7 columns on desktop (input → agent →
+   actions → output, with arrow spacers). The original template
+   has no mobile fallback; below 760px we stack to one column
+   and rotate the arrows to point downward.
+   ============================================================ */
+.th-pipeline-grid {
+  display: grid;
+  grid-template-columns: 1.25fr auto 1fr auto 1.35fr auto 1fr;
+  gap: 10px;
+  align-items: stretch;
+  margin-top: 32px;
+}
+.th-pipeline-arrow {
+  align-self: center;
+  color: var(--th-teal);
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+}
+@media (max-width: 760px) {
+  .th-pipeline-grid {
+    grid-template-columns: 1fr;
+  }
+  .th-pipeline-arrow {
+    transform: rotate(90deg);
+    padding: 2px 0;
+  }
+}
