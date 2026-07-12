@@ -32,7 +32,8 @@ export const defaultContent: SiteContent = {
     headline: "One order. Voice and chat, working as one agent.",
     subheadline:
       "A returning customer calls KFC, reorders last time's meal plus a Rice & Chicken combo — and the agent closes the order across voice and Zalo without a human touching it.",
-    videoTitle: "Demo video goes here",
+    videoEmbedUrl: "https://www.youtube-nocookie.com/embed/KK-wFHlPUzc",
+    videoTitle: "KFC conversational ordering demo",
     videoCaption: "Voice re-order + voucher + Zalo confirmation · 16:9",
     steps: [
       {
@@ -164,16 +165,14 @@ export const defaultContent: SiteContent = {
     workflowIntroPrefix: "Connects to the exact systems named in the brief — ",
     workflowIntroBold: "no additional equipment, no changes to KFC store workflow.",
     workflowChips: ["Messenger", "Zalo", "Mobile app", "OMS", "Loyalty"],
-    workflowNotes: [
-      {
-        label: "Guardrails.",
-        body: " Constrained to KFC’s live menu & voucher data — never invents items or prices. Confirms before committing an order; escalates on low confidence.",
-      },
-      {
-        label: "Data.",
-        body: " Customer identity and history stay in KFC’s ownership.",
-      },
-    ],
+    guardrails: {
+      label: "Guardrails.",
+      body: " Constrained to KFC’s live menu & voucher data — never invents items or prices. Confirms before committing an order; escalates on low confidence.",
+    },
+    dataNote: {
+      label: "Data.",
+      body: " Customer identity and history stay in KFC’s ownership.",
+    },
   },
 
   economics: {

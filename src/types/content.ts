@@ -57,6 +57,8 @@ export interface DemoContent {
   eyebrow: string;
   headline: string;
   subheadline: string;
+  /** embeddable video URL; renders a placeholder when empty */
+  videoEmbedUrl: string;
   videoTitle: string;
   videoCaption: string;
   steps: DemoStep[];
@@ -114,7 +116,8 @@ export interface MetricsWorkflowContent {
   workflowIntroPrefix: string;
   workflowIntroBold: string;
   workflowChips: string[];
-  workflowNotes: LabeledNote[];
+  guardrails: LabeledNote;
+  dataNote: LabeledNote;
 }
 
 // ---------- Economics ----------

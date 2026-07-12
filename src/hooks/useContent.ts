@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { defaultContent } from "../data/defaults";
 import { deepMerge } from "../lib/deepMerge";
-import { normalizeContent } from "../lib/normalizeContent";
 import type { SiteContent } from "../types/content";
 
 export function useContent(): SiteContent {
@@ -24,7 +23,7 @@ export function useContent(): SiteContent {
         ) {
           const merged = deepMerge(
             defaultContent as unknown as Record<string, unknown>,
-            normalizeContent(data) as Record<string, unknown>,
+            data as Record<string, unknown>,
           ) as unknown as SiteContent;
 
           setContent((prev) => {
