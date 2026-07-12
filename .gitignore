@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 *.tsbuildinfo
+
+# secrets / local env
+.env
+.env.*
