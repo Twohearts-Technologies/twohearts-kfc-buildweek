@@ -213,6 +213,25 @@ async function deleteVoiceDebugSession(sessionId: string): Promise<void> {
   );
 }
 
+/**
+ * Link the ElevenLabs conversation id back to the backend session so the
+ * dashboard's /live-turns endpoint can serve turns keyed by conversationId.
+ * Fire-and-forget; a failure here degrades the dashboard to post-call summary
+ * but does not affect the caller experience.
+ */
+async function linkSessionConversation(
+  sessionId: string,
+  conversationId: string,
+): Promise<void> {
+  await fetchVoiceJson(
+    `/api/ai/voice/eleven/public-session/${encodeURIComponent(sessionId)}/conversation`,
+    {
+      method: "POST",
+      body: JSON.stringify({ conversationId }),
+    },
+  );
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
@@ -388,9 +407,17 @@ export async function startCustomerVoiceSession({
     throw createAbortError();
   }
 
+  const providerConversationId = activeSession.getId?.() ?? undefined;
+  if (providerConversationId) {
+    void linkSessionConversation(
+      session.sessionId,
+      providerConversationId,
+    ).catch(() => undefined);
+  }
+
   return {
     sessionId: session.sessionId,
-    providerConversationId: activeSession.getId?.() ?? undefined,
+    providerConversationId,
     end: () => endElevenSession(session.sessionId, activeSession),
   };
 }
