@@ -251,6 +251,384 @@ html { scroll-behavior: smooth; }
 .th-cta-secondary:hover { background: rgba(25, 171, 181, 0.10); }
 .th-cta-secondary:active { transform: scale(0.97); }
 
+/* ============================================================
+   Hero live-agent phone preview
+   ============================================================ */
+.th-hero-content {
+  max-width: 920px;
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+  transition:
+    opacity 280ms var(--ease-out),
+    clip-path 460ms var(--ease-in-out),
+    transform 520ms var(--ease-out);
+}
+.th-hero-shell.is-phone-open .th-hero-content {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-56px);
+  pointer-events: none;
+}
+.th-phone-dock {
+  position: fixed;
+  top: calc(66px + ((100vh - 66px) / 2));
+  left: 50%;
+  z-index: 45;
+  width: clamp(310px, 21vw, 360px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(min(32vw, 430px), -50%) scale(0.96);
+  transition:
+    opacity 360ms var(--ease-out) 120ms,
+    transform 720ms var(--ease-out) 120ms;
+}
+.th-phone-dock.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+.th-phone-frame {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: clamp(540px, calc(100vh - 132px), 640px);
+  padding: 22px;
+  border: 10px solid #171717;
+  border-radius: 42px;
+  background: #f7fbfc;
+  box-shadow: 0 30px 80px rgba(19, 91, 100, 0.25);
+}
+.th-phone-speaker {
+  width: 72px;
+  height: 7px;
+  margin: 0 auto 22px;
+  border-radius: var(--radius-pill);
+  background: #1f1f1f;
+}
+.th-phone-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100% - 29px);
+  overflow: hidden;
+  border-radius: 28px;
+}
+.th-phone-close {
+  position: absolute;
+  top: 78px;
+  right: -52px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--th-line);
+  border-radius: var(--radius-full);
+  background: #fff;
+  color: var(--th-ink-2);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.th-customer-call {
+  --customer-call-accent: #e4002b;
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 28px 14px 18px;
+  color: var(--th-ink);
+  background:
+    radial-gradient(circle at 50% 38%, rgba(25, 171, 181, 0.16), transparent 42%),
+    linear-gradient(180deg, #fbfeff 0%, #eef8fa 100%);
+}
+.th-customer-call-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  padding: 7px 12px;
+  border: 1px solid rgba(19, 91, 100, 0.12);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--th-teal-dark);
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 10px 28px rgba(19, 91, 100, 0.08);
+}
+.th-customer-call-status.is-error {
+  border-color: rgba(228, 0, 43, 0.18);
+  background: rgba(228, 0, 43, 0.07);
+  color: #9f001f;
+}
+.th-customer-call-status.is-ended,
+.th-customer-call-status.is-idle {
+  color: var(--th-ink-3);
+}
+.th-customer-call-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: var(--th-teal);
+  box-shadow: 0 0 0 5px rgba(25, 171, 181, 0.14);
+}
+.th-customer-call-status.is-active .th-customer-call-dot,
+.th-customer-call-status.is-starting .th-customer-call-dot {
+  animation: th-customer-status-dot 1.8s ease-in-out infinite;
+}
+.th-customer-call-status.is-error .th-customer-call-dot {
+  background: #e4002b;
+  box-shadow: 0 0 0 5px rgba(228, 0, 43, 0.12);
+}
+.th-customer-call-status.is-ended .th-customer-call-dot,
+.th-customer-call-status.is-idle .th-customer-call-dot {
+  background: #9ca8ad;
+  box-shadow: 0 0 0 5px rgba(156, 168, 173, 0.12);
+}
+.th-customer-wave-stage {
+  position: relative;
+  width: min(220px, 82%);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.th-customer-wave {
+  position: absolute;
+  inset: 22%;
+  border: 1px solid rgba(25, 171, 181, 0.24);
+  border-radius: var(--radius-full);
+  opacity: 0;
+  animation: th-customer-wave 2.8s ease-out infinite;
+  transition:
+    border-color 220ms var(--ease-out),
+    inset 220ms var(--ease-out);
+}
+.th-customer-wave-two {
+  animation-delay: 620ms;
+}
+.th-customer-wave-three {
+  animation-delay: 1240ms;
+}
+.th-customer-wave-stage.is-speaking .th-customer-wave {
+  inset: 17%;
+  border-width: 1.5px;
+  border-color: rgba(25, 171, 181, 0.4);
+  animation-name: th-customer-wave-speaking;
+  animation-duration: 1.55s;
+}
+.th-customer-wave-stage.is-speaking .th-customer-wave-two {
+  animation-delay: 320ms;
+}
+.th-customer-wave-stage.is-speaking .th-customer-wave-three {
+  animation-delay: 640ms;
+}
+.th-customer-wave-stage.is-speaking .th-customer-logo-pulse {
+  box-shadow:
+    0 24px 68px rgba(19, 91, 100, 0.22),
+    0 0 0 18px rgba(25, 171, 181, 0.1);
+  animation-duration: 1.25s;
+}
+.th-customer-logo-pulse {
+  position: relative;
+  z-index: 1;
+  width: 112px;
+  height: 112px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 22px 60px rgba(19, 91, 100, 0.16),
+    0 0 0 14px rgba(25, 171, 181, 0.07);
+  animation: th-customer-logo-pulse 1.9s ease-in-out infinite;
+  overflow: hidden;
+}
+.th-customer-brand-mark {
+  position: relative;
+  z-index: 2;
+  width: 62px;
+  height: auto;
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 240ms var(--ease-out),
+    transform 320ms var(--ease-out);
+}
+.th-customer-logo-pulse.is-entering .th-customer-brand-mark,
+.th-customer-logo-pulse.is-visible .th-customer-brand-mark {
+  opacity: 0;
+  transform: scale(0.96);
+}
+.th-customer-thinking-motion {
+  position: absolute;
+  inset: 50%;
+  z-index: 1;
+  width: 136px;
+  height: 136px;
+  display: block;
+  object-fit: contain;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.98);
+  transition:
+    opacity 320ms var(--ease-out),
+    transform 360ms var(--ease-out);
+  pointer-events: none;
+}
+.th-customer-logo-pulse.is-entering .th-customer-thinking-motion,
+.th-customer-logo-pulse.is-visible .th-customer-thinking-motion {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.th-customer-logo-pulse.is-leaving .th-customer-thinking-motion {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.985);
+}
+.th-customer-call-copy {
+  text-align: center;
+}
+.th-customer-call-copy p {
+  margin: 0;
+  color: var(--th-ink);
+  font-size: 19px;
+  font-weight: 800;
+}
+.th-customer-call-copy span {
+  display: block;
+  margin-top: 6px;
+  color: var(--th-ink-3);
+  font-size: 12px;
+  font-weight: 700;
+}
+.th-customer-call-error {
+  width: 100%;
+  max-height: 64px;
+  overflow: auto;
+  border: 1px solid rgba(228, 0, 43, 0.18);
+  border-radius: 14px;
+  padding: 9px 10px;
+  background: rgba(228, 0, 43, 0.07);
+  color: #9f001f;
+  font-size: 11px;
+  line-height: 1.35;
+}
+.th-customer-call-button {
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--customer-call-accent);
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 14px 32px rgba(228, 0, 43, 0.24);
+  transition:
+    transform 160ms var(--ease-out),
+    filter 160ms var(--ease-out),
+    opacity 160ms var(--ease-out);
+}
+.th-customer-call-button:hover {
+  filter: brightness(1.05);
+}
+.th-customer-call-button:active {
+  transform: scale(0.97);
+}
+.th-customer-call-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+.th-customer-call-button.is-ending {
+  background: var(--th-ink);
+  box-shadow: 0 14px 32px rgba(34, 34, 34, 0.18);
+}
+@keyframes th-customer-wave {
+  0% {
+    opacity: 0.58;
+    transform: scale(0.52);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.86);
+  }
+}
+@keyframes th-customer-wave-speaking {
+  0% {
+    opacity: 0.82;
+    transform: scale(0.4);
+  }
+  44% {
+    opacity: 0.36;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.28);
+  }
+}
+@keyframes th-customer-logo-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+@keyframes th-customer-status-dot {
+  0%, 100% {
+    opacity: 0.72;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+}
+@media (max-width: 980px) {
+  .th-hero-shell.is-phone-open .th-hero-content {
+    transform: translateY(-20px);
+  }
+  .th-phone-frame {
+    height: clamp(500px, calc(100vh - 116px), 620px);
+  }
+}
+@media (max-width: 520px) {
+  .th-phone-dock {
+    width: min(310px, calc(100vw - 100px));
+  }
+  .th-phone-close {
+    top: 68px;
+    right: -42px;
+  }
+  .th-phone-frame {
+    padding: 16px;
+    border-width: 8px;
+    border-radius: 34px;
+  }
+  .th-phone-screen {
+    border-radius: 24px;
+  }
+  .th-customer-call {
+    padding: 24px 12px 16px;
+  }
+  .th-customer-wave-stage {
+    width: min(204px, 80%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .th-customer-wave,
+  .th-customer-logo-pulse,
+  .th-customer-call-status.is-active .th-customer-call-dot,
+  .th-customer-call-status.is-starting .th-customer-call-dot {
+    animation: none;
+  }
+}
+
 /* Ghost link buttons on the dark footer */
 .th-ghost-link {
   transition: border-color 120ms;
@@ -285,4 +663,12 @@ html { scroll-behavior: smooth; }
     transform: rotate(90deg);
     padding: 2px 0;
   }
+}
+
+/* ============================================================
+   Header event label — hide on phones, where it collides with
+   the co-brand logo/name in the sticky header bar.
+   ============================================================ */
+@media (max-width: 600px) {
+  .th-event-label { display: none; }
 }

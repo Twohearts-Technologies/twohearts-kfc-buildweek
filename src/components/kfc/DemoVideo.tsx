@@ -84,46 +84,62 @@ export function DemoVideo({ content, kfcRed, showTexture }: DemoVideoProps) {
                 }}
               />
             )}
-            <div
-              style={{
-                position: "relative",
-                color: "rgba(255,255,255,.65)",
-                textAlign: "center",
-                padding: 24,
-                fontSize: 13,
-              }}
-            >
+            {content.videoEmbedUrl ? (
+              <iframe
+                src={content.videoEmbedUrl}
+                title={content.videoTitle}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  border: 0,
+                }}
+              />
+            ) : (
               <div
                 style={{
-                  width: 74,
-                  height: 74,
-                  borderRadius: "50%",
-                  background: kfcRed,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "0 auto 16px",
-                  color: "#fff",
-                  fontSize: 26,
-                  boxShadow: "var(--shadow-md)",
+                  position: "relative",
+                  color: "rgba(255,255,255,.65)",
+                  textAlign: "center",
+                  padding: 24,
+                  fontSize: 13,
                 }}
               >
-                ▶
+                <div
+                  style={{
+                    width: 74,
+                    height: 74,
+                    borderRadius: "50%",
+                    background: kfcRed,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "0 auto 16px",
+                    color: "#fff",
+                    fontSize: 26,
+                    boxShadow: "var(--shadow-md)",
+                  }}
+                >
+                  ▶
+                </div>
+                <strong
+                  style={{
+                    color: "#fff",
+                    display: "block",
+                    fontSize: 17,
+                    marginBottom: 6,
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 500,
+                  }}
+                >
+                  {content.videoTitle}
+                </strong>
+                {content.videoCaption}
               </div>
-              <strong
-                style={{
-                  color: "#fff",
-                  display: "block",
-                  fontSize: 17,
-                  marginBottom: 6,
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 500,
-                }}
-              >
-                {content.videoTitle}
-              </strong>
-              {content.videoCaption}
-            </div>
+            )}
           </div>
         </div>
 

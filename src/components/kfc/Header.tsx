@@ -1,4 +1,5 @@
 import type { HeaderContent } from "../../types/content";
+import kfcLogo from "../../assets/kfc-logo-image.png";
 import logo from "../../assets/twohearts-logo.svg";
 
 interface HeaderProps {
@@ -7,6 +8,8 @@ interface HeaderProps {
 }
 
 export function Header({ content, kfcRed }: HeaderProps) {
+  const kfcRegionLabel = content.kfcLabel.replace(/^KFC\s*/i, "").trim();
+
   return (
     <header
       style={{
@@ -41,18 +44,30 @@ export function Header({ content, kfcRed }: HeaderProps) {
             ✕
           </span>
           <span
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              fontSize: 17,
-              color: kfcRed,
-              letterSpacing: "-.01em",
-            }}
+            style={{ display: "inline-flex", alignItems: "center", gap: 7 }}
           >
-            {content.kfcLabel}
+            <img
+              src={kfcLogo}
+              alt="KFC"
+              style={{ height: 42, width: "auto", display: "block" }}
+            />
+            {kfcRegionLabel && (
+              <span
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 700,
+                  fontSize: 17,
+                  color: kfcRed,
+                  letterSpacing: "-.01em",
+                }}
+              >
+                {kfcRegionLabel}
+              </span>
+            )}
           </span>
         </div>
         <div
+          className="th-event-label"
           style={{
             fontSize: 11,
             fontWeight: 700,

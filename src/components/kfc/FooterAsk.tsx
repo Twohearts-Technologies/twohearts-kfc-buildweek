@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import type { FooterContent } from "../../types/content";
+import kfcLogo from "../../assets/kfc-logo-image.png";
 import texture from "../../assets/texture.png";
 import logoFooter from "../../assets/twohearts-logo-footer.svg";
 
@@ -12,6 +13,8 @@ interface FooterAskProps {
 const SEP = " · ";
 
 export function FooterAsk({ content, showTexture }: FooterAskProps) {
+  const kfcRegionLabel = content.kfcLabel.replace(/^KFC\s*/i, "").trim();
+
   return (
     <footer
       style={{
@@ -133,13 +136,40 @@ export function FooterAsk({ content, showTexture }: FooterAskProps) {
           <span style={{ color: "rgba(255,255,255,.4)", fontSize: 13 }}>✕</span>
           <span
             style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 700,
-              fontSize: 14,
-              color: "rgba(255,255,255,.9)",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 7,
             }}
           >
-            {content.kfcLabel}
+            <span
+              style={{
+                display: "inline-grid",
+                placeItems: "center",
+                width: 42,
+                height: 42,
+                borderRadius: 6,
+                background: "#fff",
+                boxShadow: "0 8px 22px rgba(0,0,0,.18)",
+              }}
+            >
+              <img
+                src={kfcLogo}
+                alt="KFC"
+                style={{ height: 36, width: "auto", display: "block" }}
+              />
+            </span>
+            {kfcRegionLabel && (
+              <span
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 700,
+                  fontSize: 14,
+                  color: "rgba(255,255,255,.9)",
+                }}
+              >
+                {kfcRegionLabel}
+              </span>
+            )}
           </span>
         </div>
         <p

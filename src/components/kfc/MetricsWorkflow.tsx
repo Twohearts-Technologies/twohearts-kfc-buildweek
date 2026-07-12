@@ -134,19 +134,14 @@ export function MetricsWorkflow({ content, kfcRed }: MetricsWorkflowProps) {
               </span>
             ))}
           </div>
-          {content.workflowNotes.map((note, i) => (
-            <p
-              key={i}
-              style={{
-                margin: i === 0 ? 0 : "12px 0 0",
-                fontSize: 14,
-                color: "var(--th-ink)",
-              }}
-            >
-              <b style={{ color: kfcRed }}>{note.label}</b>
-              {note.body}
-            </p>
-          ))}
+          <p style={{ margin: 0, fontSize: 14, color: "var(--th-ink)" }}>
+            <b style={{ color: kfcRed }}>{content.guardrails.label}</b>
+            {content.guardrails.body}
+          </p>
+          <p style={{ margin: "12px 0 0", fontSize: 14, color: "var(--th-ink)" }}>
+            <b style={{ color: kfcRed }}>{content.dataNote.label}</b>
+            {content.dataNote.body}
+          </p>
         </div>
       </div>
     </section>
