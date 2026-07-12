@@ -236,6 +236,56 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
 
+/**
+ * Push a single transcript turn to the backend so the dashboard's /live-turns
+ * endpoint can surface it in near real-time. Fire-and-forget; a failed POST
+ * degrades to the post-call summary but never blocks the call.
+ */
+async function pushTranscriptTurn(
+  sessionId: string,
+  speaker: "customer" | "ai",
+  text: string,
+): Promise<void> {
+  await fetchVoiceJson(
+    `/api/ai/voice/eleven/public-session/${encodeURIComponent(sessionId)}/turn`,
+    {
+      method: "POST",
+      body: JSON.stringify({ speaker, text }),
+    },
+  );
+}
+
+/**
+ * Extract a single caller/agent turn from an ElevenLabs SDK message payload.
+ * Returns null if the message is not a transcript event (heartbeat, tool
+ * call, mode change, etc.).
+ */
+function inferTurnFromMessage(
+  raw: unknown,
+): { speaker: "customer" | "ai"; text: string } | null {
+  if (!isRecord(raw)) return null;
+  const text =
+    (typeof raw.text === "string" && raw.text.trim()) ||
+    (typeof raw.message === "string" && raw.message.trim()) ||
+    (typeof raw.transcript === "string" && raw.transcript.trim()) ||
+    (typeof raw.content === "string" && raw.content.trim()) ||
+    "";
+  if (!text) return null;
+
+  const rawRole =
+    (typeof raw.role === "string" && raw.role) ||
+    (typeof raw.source === "string" && raw.source) ||
+    (typeof raw.speaker === "string" && raw.speaker) ||
+    "";
+  if (rawRole === "user" || rawRole === "customer" || rawRole === "caller") {
+    return { speaker: "customer", text };
+  }
+  if (rawRole === "agent" || rawRole === "assistant" || rawRole === "ai") {
+    return { speaker: "ai", text };
+  }
+  return null;
+}
+
 function inferMode(value: unknown): CustomerVoiceMode {
   const raw =
     typeof value === "string"
@@ -380,6 +430,16 @@ export async function startCustomerVoiceSession({
       dynamicVariables:
         session.dynamicVariables as ElevenStartOptions["dynamicVariables"],
       customLlmExtraBody: { session_id: session.sessionId },
+      onMessage: (message: unknown) => {
+        const turn = inferTurnFromMessage(message);
+        if (turn) {
+          void pushTranscriptTurn(
+            session.sessionId,
+            turn.speaker,
+            turn.text,
+          ).catch(() => undefined);
+        }
+      },
       onError: (sdkError) => {
         onError?.(
           typeof sdkError === "string" ? sdkError : "Voice session error",
